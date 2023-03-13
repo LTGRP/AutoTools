@@ -2,7 +2,7 @@
 
 clear
 
-echo "Mostrando IPs con más conexiones"
+echo "Showing IPs with max connections"
 
 echo ""
 
@@ -12,7 +12,7 @@ awk '{print $1 }' access.log | sort | uniq -c | sort -nr | head -20
 
 echo ""
 
-echo ; read -p "Dime IP a bloquear " IP;
+echo ; read -p "Type in IP to BLOCK " IP;
 
 echo ""
 
@@ -20,4 +20,4 @@ echo ""
 
 echo ""
 
-echo "$IP bloqueada para siempre"
+echo "$IP IP Blocked Forever!!"
