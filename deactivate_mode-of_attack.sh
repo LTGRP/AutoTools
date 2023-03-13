@@ -2,7 +2,7 @@
 
 clear
 
-echo "Mostrando interfaces de red disponibles"
+echo "Show available network interfaces"
 
 echo ""
 
@@ -10,7 +10,7 @@ ifconfig | grep :
 
 echo ""
 
-echo ; read -p "¿Para qué interfaz quieres configurar las reglas?: " INTERFAZ;
+echo ; read -p "Which interface do you want to configure? " INTERFACE;
 
 echo ""
 
@@ -21,7 +21,7 @@ touch /etc/pf.conf
 echo '
 
 # the external network interface to the internet
-ext_if="'$INTERFAZ'"
+ext_if="'$INTERFACE'"
 # port on which sshd is running
 ssh_port = "3333"
 # allowed inbound ports (services hosted by this machine)
@@ -59,4 +59,4 @@ service pf reload
 
 echo ""
 
-echo "MODO ATAQUE DESACTIVADO"
+echo "MODE OF ATTACK DEACTIVATED"
