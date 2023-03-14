@@ -2,23 +2,23 @@
 
 clear
 
-echo "Vamos a crear un nuevo VHOST"
+echo "Let's create a new VHOST"
 
 echo ""
 
 sleep 1
 
-echo ; read -p "Dime dominio a añadir: " DOMINIO;
+echo ; read -p "Enter Domain to add: " DOMAIN;
 
-echo ; read -p "Dime nombre del usuario: " USUARIO;
+echo ; read -p "Enter User to add: " USER;
 
-cd /usr/local/etc/nginx/conf.d && touch $DOMINIO.conf
+cd /usr/local/etc/nginx/conf.d && touch $DOMAIN.conf
 
-mkdir /usr/home/$USUARIO/public_html/$DOMINIO
+mkdir /usr/home/$USER/public_html/$DOMAIN
 
-ln -s /usr/local/www/phpMyAdmin/ /usr/home/$USUARIO/public_html/$DOMINIO/phpmyadmin
+ln -s /usr/local/www/phpMyAdmin/ /usr/home/$USER/public_html/$DOMAIN/phpmyadmin
 
-chown -R www:www /usr/home/$USUARIO/public_html/$DOMINIO
+chown -R www:www /usr/home/$USER/public_html/$DOMAIN
 
 echo ""
 
@@ -28,15 +28,15 @@ server {
 listen 8080;
 listen [::]:8080;
 
-server_name $DOMINIO;
+server_name $DOMAIN;
 
-root /usr/home/$USUARIO/public_html/$DOMINIO;
+root /usr/home/$USER/public_html/$DOMAIN;
 index index.php index.html;
     
     # allow POSTs to static pages
     error_page                 405    =200 \$uri;
-    access_log                 /var/log/nginx/$DOMINIO-access.log;
-    error_log                  /var/log/nginx/$DOMINIO-error.log;
+    access_log                 /var/log/nginx/$DOMAIN-access.log;
+    error_log                  /var/log/nginx/$DOMAIN-error.log;
     
         if (\$http_referer ~* (babes|click|diamond|forsale|girl|jewelry|love|nudit|organic|poker|porn|poweroversoftware|sex|teen|video|webcam|zippo) ) {
        return 444;
@@ -89,7 +89,7 @@ location = ^/robots.txt {
 location ~ /\. { access_log off; log_not_found off; deny all; }
 
         location ~ [^/]\.php(/|$) {
-        root	/usr/home/$USUARIO/public_html/$DOMINIO;
+        root	/usr/home/$USER/public_html/$DOMAIN;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
         fastcgi_param SCRIPT_FILENAME \$request_filename;    
@@ -104,13 +104,13 @@ location ~ /\. { access_log off; log_not_found off; deny all; }
     }
 	
 }
-" >> $DOMINIO.conf
+" >> $DOMAIN.conf
 
-echo "VHOST para $DOMINIO creado correctamente"
+echo "VHOST for $DOMAIN has been created correctly"
 
 echo ""
 
-echo "Reiniciando NGINX"
+echo "Reinitializing NGINX"
 
 sleep 2
 
@@ -120,5 +120,5 @@ service php-fpm restart
 
 echo ""
 
-echo "Completado"
+echo "Completed"
 
